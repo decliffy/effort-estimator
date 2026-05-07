@@ -1,0 +1,7 @@
+Modify an existing application. Involves creation of a new ECS service using spring boot. Exposes a new end point via API gateway. Consume a new Kafka topic as well as a partner API.
+Create an AWS Lambda function which scales up or down the number of ECS tasks running based on a signal (specific kafka header and trailer message)
+Enhance an existing spring boot microservice to expose a new end-point. Change impacts the facade layer as well as backend services and involves changes to existing database tables.
+Create spring boot application as ECS service to expose OTP generation API.
+Setup CI/CD pipeline to build and deploy ECS service on provisioned Amazon ECS cluster.
+Build a new application with CRUD capabilities based on a pre-defined data model.
+Enhance an existing spring boot microservice. The enhancement involves calling a new partner API that is under development. The new feature also involves publishing data to a data lake. Additionally, the enhancement involves consuming from an existing kafka topic and publishing to a new kafka topic to be setup.
