@@ -44,6 +44,22 @@ class TestEstimateTask:
         assert isinstance(result, EstimationError)
         assert "API error" in result.message or result.message
 
+    def test_markdown_fenced_json_is_parsed_correctly(self):
+        request = EstimationRequest(description="Some task")
+        fenced = '```json\n{"size": "M", "rationale": "A medium task.", "assumptions": []}\n```'
+        mock_msg = MagicMock()
+        mock_msg.content = [MagicMock(text=fenced)]
+
+        with patch("estimator.estimator._get_client") as mock_client_fn:
+            mock_client = MagicMock()
+            mock_client.messages.create.return_value = mock_msg
+            mock_client_fn.return_value = mock_client
+
+            result = estimate_task(request)
+
+        assert isinstance(result, EstimationResult)
+        assert result.size == TShirtSize.M
+
     def test_malformed_response_returns_estimation_error(self):
         request = EstimationRequest(description="Some task")
         mock_msg = MagicMock()

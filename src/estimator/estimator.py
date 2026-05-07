@@ -51,6 +51,12 @@ def estimate_task(
     raw = message.content[0].text.strip()
     logger.debug("LLM response received in %.2fs", elapsed)
 
+    # Strip markdown code fences if the model wrapped its response in them
+    if raw.startswith("```"):
+        raw = raw.split("\n", 1)[-1]  # drop the opening ```json line
+        raw = raw.rsplit("```", 1)[0]  # drop the closing ```
+        raw = raw.strip()
+
     try:
         data = json.loads(raw)
     except json.JSONDecodeError:
